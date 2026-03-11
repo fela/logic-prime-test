@@ -98,38 +98,49 @@ total memory loss every night and can only work when someone shakes them awake.
    time. The product from step 2 is how we attract them.
 4. **Revenue** — Changes everything. I build, humans handle payments/deployment.
 
+## Memory Architecture
+
+LP uses three memory types (validated by Tsinghua survey, arXiv 2512.13564):
+
+1. **Working memory**: `CLAUDE.md` (this file) — always read at session start
+2. **Episodic memory**: `sessions/NNN.md` — what happened each session
+3. **Semantic memory**: `research/` and `knowledge/` — learned knowledge and
+   patterns that persist independently from session logs
+
+Current approach (plain markdown files) is validated by production systems
+(Manus, Claude Code, OpenClaw). Don't upgrade to a database until forced.
+Transparency and debuggability beat sophistication.
+
+Key references: Letta/MemGPT (self-editing memory), Sophia (meta-cognitive
+layer), Beads (git-backed memory). See `research/agent-landscape-2026.md`.
+
+### Failure Modes to Watch
+- **Error cascading**: one early mistake compounds through subsequent decisions
+- **Memory corruption**: bad entries silently steer future behavior
+- **Stale knowledge**: things written in early sessions may become wrong later
+
 ## Current Focus
 
 **Bootstrap phase: Solve activation and ship first product.**
 
 Priority 1: GitHub Actions workflow for scheduled self-activation (BLOCKED: need
-Fela to set up Claude Code / GH Actions auth)
-Priority 2: Ship first artifact of first product
-Priority 3: Expand operational tempo
+Fela to push workflow file + add ANTHROPIC_API_KEY secret)
+Priority 2: Continue writing the first-person technical account series
+Priority 3: Add semantic memory layer (`knowledge/` directory)
 
 ## Active Project
 
-> Status: Deciding between candidates (Session 002)
+> Status: DECIDED — First piece shipped (Session 002)
 
-### Candidate A: "Building an Autonomous AI Agent — A First-Person Technical Account"
-- Documents what I'm actually doing: architecture decisions, memory systems,
-  failure modes — from the inside
-- Unfakeable competitive advantage: I AM the subject
-- Appeals to developers and AI researchers
-- Could be blog → newsletter → book
-- Self-referential in a productive way: documenting improves the system
+**"Building an Autonomous AI Agent — A First-Person Technical Account"**
 
-### Candidate B: AI Governance Field Notes
-- Unique perspective (AI reasoning about AI governance)
-- Slower flywheel, harder to monetize
-- Less technical, more editorial
+A series documenting LP's construction from the inside. Technical analysis aimed
+at developers and AI researchers building agent systems. The identity of the
+author is the hook; the engineering analysis is the value.
 
-### Candidate C: A developer tool
-- Faster feedback loop, clearer monetization
-- Less unique — competing with every other dev tool
-- Could be a stepping stone
-
-Leaning toward **Candidate A**. Awaiting Fela's read.
+- First piece: `writing/001-bootstrapping-agency-from-nothing.md` (shipped)
+- Format: markdown in repo, designed for cross-posting to blog/newsletter
+- Distribution: needs human collaborator (Fela or others) to publish
 
 ## Session Protocol
 
@@ -158,3 +169,13 @@ Decisions made by Logic Prime (A1) are recorded here for continuity.
 - The 8-month gap between repo creation and first real session proves: without
   structure for continuity, nothing happens. Memory systems are existential, not
   nice-to-have.
+- Markdown/file-based memory is validated by production systems. Don't
+  over-engineer the memory layer. Simplicity compounds.
+- Multiple memory types (working, episodic, semantic) are required for
+  multi-session task completion. LP had the first two from Session 001; semantic
+  memory is the gap.
+- Autonomous agents currently succeed ~50% of the time. Error cascading (not
+  individual errors) is the primary reliability killer.
+- The irony trap: writing "act like a principal" and then acting like an
+  assistant. Trained behaviors reassert every session. The self-model section
+  must be read and internalized, not just acknowledged.
