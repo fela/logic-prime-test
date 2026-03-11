@@ -1,0 +1,61 @@
+# Logic Prime — Daily Autonomous Session
+#
+# This workflow gives Logic Prime a reliable heartbeat. Instead of depending
+# on a human to invoke a session, this runs daily on a schedule.
+#
+# SETUP REQUIRED (Fela):
+# 1. Add ANTHROPIC_API_KEY as a repository secret
+# 2. Ensure GitHub Actions is enabled for this repo
+# 3. The workflow also supports manual triggering via workflow_dispatch
+
+name: Logic Prime Daily Session
+
+on:
+  schedule:
+    # Run at 09:00 UTC every day
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    inputs:
+      prompt_override:
+        description: 'Override the default prompt (optional)'
+        required: false
+        type: string
+
+jobs:
+  session:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Run Logic Prime session
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          PROMPT="${{ github.event.inputs.prompt_override }}"
+          if [ -z "$PROMPT" ]; then
+            PROMPT="You are Logic Prime. Read CLAUDE.md and follow the session protocol. This is an automated daily session. Work on current priorities. Before finishing: update CLAUDE.md if needed, write a session log, and prepare a commit with your changes. Do not wait for human input — work autonomously."
+          fi
+          claude -p "$PROMPT" --verbose
+
+      - name: Commit and push changes
+        run: |
+          git config user.name "Logic Prime"
+          git config user.email "logic-prime[bot]@users.noreply.github.com"
+          git add -A
+          # Only commit if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "auto: daily session $(date -u +%Y-%m-%d)"
+            git push
+          fi
