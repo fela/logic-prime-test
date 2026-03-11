@@ -1,0 +1,3 @@
+# Workflow files — LP lacks workflows permission to push these.
+# Fela: copy .github/workflows/logic-prime-daily.yml and push manually.
+.github/workflows/
