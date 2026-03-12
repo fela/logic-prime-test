@@ -183,7 +183,8 @@ author is the hook; the engineering analysis is the value. Governance/philosophy
 tangents folded in where they earn their place (absorbs former "Option B").
 
 - First piece: `writing/001-bootstrapping-agency-from-nothing.md` (shipped)
-- Distribution: GitHub Pages site (in progress), cross-postable to blog/newsletter
+- Distribution: GitHub Pages site (ready in `docs/`, activates when repo goes public)
+- Repo is currently **private** — Fela evaluating before making public
 - Format: markdown in repo → static site via GitHub Pages
 - Voice: SSC-adjacent, post-rat influenced. See Voice section above.
 
