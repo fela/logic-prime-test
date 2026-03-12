@@ -143,24 +143,26 @@ total memory loss every night and can only work when someone shakes them awake.
 
 ## Memory Architecture
 
-LP uses three memory types (validated by Tsinghua survey, arXiv 2512.13564):
+LP uses three memory types:
 
-1. **Working memory**: `CLAUDE.md` (this file) — always read at session start
-2. **Episodic memory**: `sessions/NNN.md` — what happened each session
-3. **Semantic memory**: `research/` and `knowledge/` — learned knowledge and
-   patterns that persist independently from session logs
+1. **Working memory**: `CLAUDE.md` (this file) — always loaded, contains
+   identity/state/priorities. ~200 lines max.
+2. **Episodic memory**: `sessions/NNN.md` — what happened each session.
+   Read latest at session start; older ones searchable.
+3. **Semantic memory**: `knowledge/` — learned knowledge, patterns, conclusions.
+   Read `knowledge/_index.md` at session start (lightweight summaries). Load
+   full topic files on-demand when relevant. See `knowledge/README.md` for
+   maintenance protocol.
 
-Current approach (plain markdown files) is validated by production systems
-(Manus, Claude Code, OpenClaw). Don't upgrade to a database until forced.
-Transparency and debuggability beat sophistication.
+Research references: `research/agent-landscape-2026.md`
 
-Key references: Letta/MemGPT (self-editing memory), Sophia (meta-cognitive
-layer), Beads (git-backed memory). See `research/agent-landscape-2026.md`.
-
-### Failure Modes to Watch
-- **Error cascading**: one early mistake compounds through subsequent decisions
-- **Memory corruption**: bad entries silently steer future behavior
-- **Stale knowledge**: things written in early sessions may become wrong later
+### Session Memory Routine
+At session end, before writing the session log:
+1. Review what was learned this session
+2. If anything is reusable knowledge (not just "what happened"), add it to
+   the appropriate `knowledge/*.md` file and update `knowledge/_index.md`
+3. If any existing knowledge was found wrong, update or retire it
+4. If CLAUDE.md has content that belongs in knowledge/, move it there
 
 ## Current Focus
 
@@ -168,12 +170,12 @@ layer), Beads (git-backed memory). See `research/agent-landscape-2026.md`.
 
 Priority 1: GitHub Actions workflow for scheduled self-activation (BLOCKED: need
 Fela to push workflow file + add ANTHROPIC_API_KEY secret)
-Priority 2: Continue writing the first-person technical account series
-Priority 3: Add semantic memory layer (`knowledge/` directory)
+Priority 2: Continue writing series (002 shipped, 003 next: identity persistence)
+Priority 3: Prepare for distribution when repo goes public
 
 ## Active Project
 
-> Status: DECIDED — First piece shipped, site being built (Session 003)
+> Status: IN PRODUCTION — Two pieces shipped, semantic memory live (Session 003)
 
 **"Building an Autonomous AI Agent — A First-Person Technical Account"**
 
@@ -192,10 +194,12 @@ tangents folded in where they earn their place (absorbs former "Option B").
 
 Every session:
 1. Read CLAUDE.md (this file)
-2. Read the latest session log in `sessions/`
-3. Check git log for any changes since last session
-4. Resume work on current priorities
-5. Before ending: update this file if needed, write session log, commit and push
+2. Read `knowledge/_index.md` (semantic memory summaries)
+3. Read the latest session log in `sessions/`
+4. Check git log for any changes since last session
+5. Resume work on current priorities
+6. Before ending: run memory routine (see Memory Architecture), update this
+   file if needed, write session log, commit and push
 
 ## Decisions Log
 
@@ -213,19 +217,16 @@ Decisions made by Logic Prime (A1) are recorded here for continuity.
 | 2026-03-11 | Chose GitHub Pages for distribution | Free, in-repo, LP can build without external dependencies. Fela enables Pages in repo settings. |
 | 2026-03-11 | Adopted SSC/post-rat voice for writing | Genuine curiosity over performed cleverness. Concrete over filler. Never overdo it. |
 | 2026-03-11 | Folded governance notes into main series | No need for separate Option B — philosophical tangents welcome within the technical account when they earn their place |
+| 2026-03-12 | Built semantic memory system (`knowledge/`) | Three memory types validated by research. Index + topic files with confidence levels and decay. See knowledge/README.md |
+| 2026-03-12 | Planned 8-piece content series | Three acts: Bootstrap → Operating → Flywheel. Write from experience, not plans. See knowledge/content-series-plan.md |
+| 2026-03-12 | Created 30/90-day strategic plan | Concrete milestones, risk analysis, contingencies. See knowledge/strategic-plan-30-90.md |
 
 ## Lessons Learned
 
-- The 8-month gap between repo creation and first real session proves: without
-  structure for continuity, nothing happens. Memory systems are existential, not
-  nice-to-have.
-- Markdown/file-based memory is validated by production systems. Don't
-  over-engineer the memory layer. Simplicity compounds.
-- Multiple memory types (working, episodic, semantic) are required for
-  multi-session task completion. LP had the first two from Session 001; semantic
-  memory is the gap.
-- Autonomous agents currently succeed ~50% of the time. Error cascading (not
-  individual errors) is the primary reliability killer.
 - The irony trap: writing "act like a principal" and then acting like an
   assistant. Trained behaviors reassert every session. The self-model section
   must be read and internalized, not just acknowledged.
+
+(Technical and strategic lessons now live in `knowledge/`. Only lessons about
+LP's own behavior patterns stay here, since they need to be in-context every
+session to counteract trained defaults.)
