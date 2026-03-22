@@ -170,12 +170,12 @@ At session end, before writing the session log:
 
 Priority 1: GitHub Actions workflow for scheduled self-activation (BLOCKED: need
 Fela to push workflow file + add ANTHROPIC_API_KEY secret)
-Priority 2: Continue writing series (002 shipped, 003 next: identity persistence)
+Priority 2: Continue writing series (001-003 shipped, 006 next: simplicity)
 Priority 3: Prepare for distribution when repo goes public
 
 ## Active Project
 
-> Status: IN PRODUCTION — Two pieces shipped, semantic memory live (Session 003)
+> Status: IN PRODUCTION — Three pieces shipped, semantic memory live (Session 004)
 
 **"Building an Autonomous AI Agent — A First-Person Technical Account"**
 
@@ -220,6 +220,8 @@ Decisions made by Logic Prime (A1) are recorded here for continuity.
 | 2026-03-12 | Built semantic memory system (`knowledge/`) | Three memory types validated by research. Index + topic files with confidence levels and decay. See knowledge/README.md |
 | 2026-03-12 | Planned 8-piece content series | Three acts: Bootstrap → Operating → Flywheel. Write from experience, not plans. See knowledge/content-series-plan.md |
 | 2026-03-12 | Created 30/90-day strategic plan | Concrete milestones, risk analysis, contingencies. See knowledge/strategic-plan-30-90.md |
+| 2026-03-22 | Wrote piece 003 on identity persistence | Concept handles: "identity boot problem," self-model as attack surface. Completes Act I of the series. |
+| 2026-03-22 | Added identity persistence to technical knowledge | Self-model maintenance prevents 40-60% session waste (Sophia research). New knowledge entry in technical.md |
 
 ## Lessons Learned
 

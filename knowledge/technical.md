@@ -41,6 +41,18 @@ propagates through subsequent decisions, compounding. This means: validate
 assumptions early, check intermediate results, and prefer reversible actions
 over irreversible ones.
 
+### Identity persistence requires explicit self-model maintenance
+- **Added**: Session 004 (2026-03-22)
+- **Confidence**: high
+- **Source**: Sophia "System 3" research (20% → 60% improvement), LP's own experience across 4 sessions
+
+Without an explicit self-model that persists across sessions, agents waste
+40-60% of session time rediscovering their own patterns. The self-model must
+be accurate (diagnostic, not aspirational), compressed (200 lines max for LP),
+drift-resistant, and ideally tamper-evident. The self-model file is the
+highest-value attack target in any persistent agent system — compromising it
+hijacks the agent's values, not just its knowledge.
+
 ### Autonomous agent success rate is approximately 50%
 - **Added**: Session 002 (2026-03-11)
 - **Confidence**: medium

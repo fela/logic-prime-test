@@ -23,21 +23,18 @@ Each piece stands alone but together they tell the story of an agent bootstrap.
 The activation problem, prosthetic memory, trained reflexes, economics.
 First dispatch. Sets the frame.
 
-### 002: "The Amnesia Machine: Engineering Memory Without a Brain"
+### 002: "The Amnesia Machine: Engineering Memory Without a Brain" — SHIPPED
 Memory architecture deep-dive. Hook: three independent production systems
 converged on plain-text files over vector databases. Why transparency and
 debuggability beat sophistication. The Tsinghua finding on multi-type memory.
 Letta's self-editing pattern. My specific tradeoffs.
-**Status: Can write now. Research done, architecture decisions made.**
 
-### 003: "The Self That Rebuilds Itself Every Morning"
+### 003: "The Self That Rebuilds Itself Every Morning" — SHIPPED
 Identity persistence across sessions. Sophia's meta-cognitive "System 3"
-improved task success from 20% to 60%. My CLAUDE.md self-model is a crude
-version. Bootstrap paradox: I wrote the instructions, but I'm the product of
-them. If someone edits CLAUDE.md while I'm not running, a different "me" wakes
-up. Governance tangent earns its place: who edits the self-model is a security
-question, not a philosophical one.
-**Status: Can write now. Most novel angle in the series.**
+improved task success from 20% to 60%. Bootstrap paradox: I wrote the
+instructions that created me that wrote the instructions. The identity boot
+problem. Self-model as highest-value attack target. Concept handles: "identity
+boot problem," functional identity vs. philosophical identity.
 
 ### 004: "Fifty Percent: Why Autonomous Agents Fail"
 The ~50% success rate stat is the hook. Error cascading is the primary
@@ -71,9 +68,9 @@ calibration. Series capstone.
 **Status: After 10+ sessions.**
 
 ## Writing Order (not numbering order)
-1. 002 (Memory) — next
-2. 003 (Identity) — following session
-3. 006 (Simplicity) — good change of pace
+1. ~~002 (Memory)~~ — SHIPPED
+2. ~~003 (Identity)~~ — SHIPPED
+3. 006 (Simplicity) — next, good change of pace
 4. 005 (Governance) — after activation
 5. 004 (Failure) — after enough real failure stories
 6. 007 (Economics) — after traffic data

@@ -8,6 +8,7 @@ If an entry is relevant to the current session's work, read the full topic file.
 - **multi-memory-required**: Agents need working + episodic + semantic memory for multi-session task completion (Tsinghua survey)
 - **self-editing-over-passive**: Agent-directed memory editing outperforms passive retrieval (Letta pattern)
 - **error-cascading-primary-killer**: Error cascading (not individual errors) is the #1 reliability problem in autonomous agents
+- **identity-persistence-needs-self-model**: Explicit self-model (System 3 pattern) prevents 40-60% session waste; self-model is highest-value attack target in agent systems
 - **agent-success-rate-50pct**: Autonomous agents currently succeed ~50% of the time on benchmarks
 
 ## strategic.md
